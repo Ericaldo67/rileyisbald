@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Shiny Side Up — Window Cleaning &amp; Power Washing</title>
 <style>
   @font-face {
@@ -185,8 +190,50 @@
   nav.links a:hover { color: #fff; }
   nav.links a:hover::after { right: 0; }
   .nav-cta { display: none; }
-  @media (min-width: 860px) { .nav-cta { display: inline-flex; } }
-  .menu-toggle { display: none; }
+  .menu-toggle {
+    display: none;
+    align-items: center; justify-content: center;
+    width: 42px; height: 42px;
+    border: 1px solid var(--line-dark);
+    border-radius: 4px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    flex: none;
+  }
+  .menu-toggle svg { width: 20px; height: 20px; }
+  .menu-toggle .icon-close { display: none; }
+  .menu-toggle[aria-expanded="true"] .icon-open { display: none; }
+  .menu-toggle[aria-expanded="true"] .icon-close { display: block; }
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height .4s var(--ease), opacity .3s var(--ease);
+  }
+  .mobile-menu.open { max-height: 60vh; opacity: 1; }
+  .mobile-menu a {
+    color: rgba(255,255,255,0.86);
+    text-decoration: none;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .mobile-menu .btn { margin-top: 20px; align-self: flex-start; }
+
+  @media (min-width: 861px) {
+    .nav-cta { display: inline-flex; }
+  }
+  @media (max-width: 860px) {
+    nav.links { display: none; }
+    .menu-toggle { display: flex; }
+    .mobile-menu { display: flex; }
+  }
 
   /* ---------- Hero ---------- */
   .hero {
@@ -367,11 +414,12 @@
     position: absolute; inset: 0;
     background: radial-gradient(500px 300px at 90% 20%, rgba(255,255,255,0.18), transparent 60%);
   }
-  .cta-inner { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; padding: 64px 0; }
+  .cta-inner { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; padding-top: 64px; padding-bottom: 64px; }
   .cta-inner h2 { color: #fff; font-size: clamp(1.9rem, 3.4vw, 2.8rem); }
   .cta-inner p { color: rgba(255,255,255,0.85); margin-top: 10px; }
   .cta-banner .btn-primary { background: #fff; color: var(--navy-950); box-shadow: 0 12px 28px -12px rgba(0,0,0,0.3); }
   .cta-banner .btn-primary:hover { background: var(--navy-950); color: #fff; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
   /* ---------- Footer ---------- */
   footer { background: var(--navy-950); color: rgba(244,240,228,0.6); padding: 56px 0 32px; }
@@ -390,6 +438,8 @@
     * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   }
 </style>
+</head>
+<body>
 
 <header id="siteHeader">
   <div class="wrap nav-row">
@@ -404,7 +454,18 @@
       <a href="#contact">Contact</a>
     </nav>
     <a class="btn btn-primary nav-cta" href="https://www.tiktok.com/@shinysidsup" target="_blank" rel="noopener">Get a Free Quote</a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
   </div>
+  <nav class="wrap mobile-menu" id="mobileMenu">
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#area">Service Area</a>
+    <a href="#contact">Contact</a>
+    <a class="btn btn-primary" href="https://www.tiktok.com/@shinysidsup" target="_blank" rel="noopener">Get a Free Quote</a>
+  </nav>
 </header>
 
 <main id="top">
@@ -540,9 +601,12 @@
     <div class="wrap cta-inner">
       <div>
         <h2>Ready for your shine?</h2>
-        <p>DM Shiny Side Up on TikTok — tell us what needs cleaning and we'll take it from there.</p>
+        <p>DM us on TikTok or Instagram, or call/text 919-746-4122 — tell us what needs cleaning and we'll take it from there.</p>
       </div>
-      <a class="btn btn-primary" href="https://www.tiktok.com/@shinysidsup" target="_blank" rel="noopener">Message on TikTok</a>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="https://www.tiktok.com/@shinysidsup" target="_blank" rel="noopener">Message on TikTok</a>
+        <a class="btn btn-ghost-dark" href="tel:+19197464122">Call or Text</a>
+      </div>
     </div>
   </section>
 </main>
@@ -567,6 +631,8 @@
         <div class="foot-col">
           <p class="eyebrow">Connect</p>
           <a href="https://www.tiktok.com/@shinysidsup" target="_blank" rel="noopener">@shinysidsup on TikTok</a>
+          <a href="https://www.instagram.com/ssuwashing" target="_blank" rel="noopener">@ssuwashing on Instagram</a>
+          <a href="tel:+19197464122">919-746-4122</a>
           <p>Wake County, NC</p>
         </div>
       </div>
@@ -587,6 +653,21 @@
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // Mobile menu
+  var menuToggle = document.getElementById('menuToggle');
+  var mobileMenu = document.getElementById('mobileMenu');
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }
+  menuToggle.addEventListener('click', function () {
+    var open = mobileMenu.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  mobileMenu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
 
   // Scroll reveal
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -657,3 +738,5 @@
     }
   }
 </script>
+</body>
+</html>
